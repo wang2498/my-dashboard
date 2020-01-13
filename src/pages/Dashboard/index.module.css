@@ -1,0 +1,11 @@
+.dashboard_left {
+  flex: 1;
+}
+.droppable_element {
+  width: 100px;
+  height: 100px;
+  background: #ccc;
+  border: 1px solid;
+  margin-right: 10px;
+  flex: 1px;
+}

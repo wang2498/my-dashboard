@@ -1,0 +1,7 @@
+.rightContent > :global(.anticon) {
+  position: relative;
+  top: 2px;
+  margin-right: 10px;
+  color: #fff;
+  font-size: 18px;
+}
