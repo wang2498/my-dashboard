@@ -9,7 +9,7 @@ export default [
     id: 2,
     key: '2',
     title: 'Dashboard',
-    path: '/'
+    path: '/Dashboard'
   },
   {
     id: 3,

@@ -1,0 +1,11 @@
+.droppable_element {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+  padding: 5px;
+  width: 100px;
+  height: 100px;
+  border-radius: 4px;
+}
