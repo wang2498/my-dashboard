@@ -1,40 +1,37 @@
+.dashboard_wrap {
+  display: flex;
+  overflow: hidden;
+}
 .dashboard_left {
-  flex: 1;
+  height: calc(100vh - 64px);
+  overflow-y: auto;
 }
-:global(.react-grid-placeholder) {
-  background: #3b46f2;
+:global(.react-grid-item.react-grid-placeholder) {
+  background: #fff !important;
 }
-:global(.react-draggable) {
-  background-color: #fff !important;
-  border: 1px solid rgb(204, 204, 204) !important;
+:glbal(.react-draggable) {
+  border: 0 !important;
 }
-:global(.react-grid-item) {
+:glbal(.react-grid-item) {
+  background: #1f1f1f !important;
   border-radius: 4px;
+}
+:glbal(.react-resizable-handle)::after {
+  width: 7px;
+  height: 7px;
+  border-right: 2px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+}
+:glbal(.resizing) {
+  border: 1px solid #ccc !important;
+}
+body {
+  background: #171b22 !important;
 }
 .remove {
   position: absolute;
-  top: -3px;
   right: 2px;
   font-size: 16px;
+  top: -3px;
   cursor: pointer;
-}
-.cardWrapRight {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-.rightWrap {
-  border-left: 1px solid #ccc;
-  width: 300px;
-  height: calc(100vh - 245px);
-  overflow-y: auto;
-  background: #f3f3f3;
-}
-.cardSectionWrap {
-  padding: 0 25px;
-  margin-bottom: 15px;
-  border-bottom: 1px solid #ccc;
-}
-.cardSectionTitle {
-  padding: 15px 0;
 }

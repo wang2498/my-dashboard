@@ -1,0 +1,30 @@
+.item_wrap {
+  margin-top: 10px;
+  text-align: center;
+}
+.droppable_element {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+  border: 2px solid rgb(51, 50, 51);
+  border-radius: 4px;
+  background: rgb(34, 32, 34);
+  padding: 10px;
+  flex: 1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+.droppable_element:hover {
+  transform: scale(1.05);
+}
+.rightItemTitle {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: left;
+  width: 80px;
+  overflow: hidden;
+  word-break: keep-all;
+  text-overflow: ellipsis;
+}
