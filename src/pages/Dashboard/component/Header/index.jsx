@@ -11,7 +11,7 @@ export default () => (
       <div className={styles.left}>
         <div className={styles.logo} key="logo" id="logo">
           <Link to="/">
-            <Icon type="dashboard" />
+            <Icon type="qrcode" />
             <h1 className={styles.headName}>My Dashboard</h1>
           </Link>
         </div>

@@ -25,19 +25,21 @@ compArr.forEach(el => {
 })
 
 const style = { border: '1px solid', backgroundColor: '#ccc' };
-
+console.log(tempObj);
 export default () => {
   const [layouts, setLayouts] = useState({ xs: [] });
   const [dragItem, setDragItem] = useState({});
   const onDrop = elemParams => {
     const newItem = {
       ...elemParams,
-      i: DragEvent.fileName,
+      i: dragItem.fileName,
       component: dragItem.component
     }
+    console.log(newItem);
     const newXs = deepChange(layouts.xs, newItem);
     setLayouts({ xs: [...newXs, newItem] })
   }
+  console.log(layouts);
   const onLayoutChange = layout => {
     const newLayout = layout.map(el => ({ ...el, component: el.i === dragItem.title ? dragItem.component : null }))
     setLayouts({ xs: newLayout.filter(e => e.i !== '__dropping-elem__') });
