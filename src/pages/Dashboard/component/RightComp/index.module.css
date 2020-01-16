@@ -19,6 +19,9 @@
 .droppable_element:hover {
   transform: scale(1.05);
 }
+.droppable_element img {
+  height: 100%;
+}
 .rightItemTitle {
   font-size: 14px;
   font-weight: bold;
