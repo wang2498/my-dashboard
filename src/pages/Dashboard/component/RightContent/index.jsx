@@ -1,7 +1,7 @@
 import React from 'react';
 import RightComp from '../RightComp';
 import FillingComp from '../RightComp/FillingComp';
-import styles from './index.module.css';
+import styles from './index.less';
 export default ({ tempObj, setDragItem, layouts }) => {
   const xsI = layouts.xs.map(i => i.i);
   return (

@@ -5,7 +5,7 @@ import Header from './component/Header';
 import RightContent from './component/RightContent';
 import '../../../node_modules/react-grid-layout/css/styles.css';
 import '../../../node_modules/react-resizable/css/styles.css';
-import styles from './index.module.css';
+import styles from './index.less';
 
 const ResponsiveGridLayout = WidthProvider(Responsive);
 const compContainerObj = importAll(
@@ -24,7 +24,6 @@ compArr.forEach(el => {
   }
 })
 
-console.log(compArr);
 const style = { border: '1px solid', backgroundColor: '#ccc' };
 
 export default () => {

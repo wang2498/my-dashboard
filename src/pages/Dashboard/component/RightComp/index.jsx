@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './index.module.css';
+import styles from './index.less';
 
 export default ({ setDragItem, dragItem, dragItem: { img } }) => {
   if (!img) img = '';

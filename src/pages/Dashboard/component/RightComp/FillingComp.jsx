@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './index.module.css';
+import styles from './index.less';
 
 export default ({ dragItem }) => (
   <div className={styles.item_wrap}>

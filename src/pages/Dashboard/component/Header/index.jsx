@@ -1,7 +1,7 @@
 import React from 'react';
 import { Layout, Icon } from 'antd';
 import { Link } from 'react-router-dom'
-import styles from './index.module.css';
+import styles from './index.less';
 
 const { Header } = Layout;
 
