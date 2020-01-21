@@ -14,8 +14,8 @@ const Test1 = props => {
 }
 export default {
   component: Test1,
-  img: 'https://cdn2.jianshu.io/assets/default_avatar/12-aeeea4bedf10f2a12c0d50d626951489.jpg',
-  group: '第一组',
-  title: '测试1',
+  img: 'http://d.lanrentuku.com/down/png/1904/fantasy_and_role_play_game/viking_2913107.png',
+  group: '文案库',
+  title: '测试文案',
   key: '1'
 }

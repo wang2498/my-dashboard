@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useEffect } from 'react'
+import { G2 } from 'bizcharts';
 import { importAll, deepChange } from '../../util';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import Header from './component/Header';
@@ -7,6 +9,8 @@ import '../../../node_modules/react-grid-layout/css/styles.css';
 import '../../../node_modules/react-resizable/css/styles.css';
 import styles from './index.less';
 
+const { Global } = G2;
+Global.setTheme('dark');
 const ResponsiveGridLayout = WidthProvider(Responsive);
 const compContainerObj = importAll(
   require.context('../../component/dashboardCards', false, /\.jsx$/)
@@ -23,12 +27,20 @@ compArr.forEach(el => {
     tempObj[el.group] = [el];
   }
 })
-
-const style = { border: '1px solid', backgroundColor: '#ccc' };
+const staticAll = (data, status) => data.map(i => ({ ...i, static: status }))
+const style = { backgroundColor: '#ccc' };
 console.log(tempObj);
 export default () => {
   const [layouts, setLayouts] = useState({ xs: [] });
   const [dragItem, setDragItem] = useState({});
+  const [status, setStatus] = useState('edit');
+  useEffect(() => {
+    if (status === 'preview') {
+      setLayouts({ xs: staticAll(layouts.xs, true) });
+    } else {
+      setLayouts({ xs: staticAll(layouts.xs, false) });
+    }
+  }, [status]);
   const onDrop = elemParams => {
     const newItem = {
       ...elemParams,
@@ -48,6 +60,9 @@ export default () => {
     const newLayout = layouts.xs.filter(el => el.i !== i.i);
     setLayouts({ xs: newLayout });
   }
+  const handleSave = () => {
+
+  }
   const rowHeight = 100;
   const marginTop = 5;
   const layoutsProps = {
@@ -61,10 +76,15 @@ export default () => {
     rowHeight,
     onLayoutChange,
   }
+  const HeaderProps = {
+    status,
+    setStatus,
+    handleSave
+  }
   return (
     <div className={styles.dashboard_wrap}>
       <div style={{ flex: 1 }}>
-        <Header />
+        <Header {...HeaderProps} />
         <ResponsiveGridLayout {...layoutsProps} >
           {layouts.xs.map(i => {
             const compKey = i.i;
@@ -72,17 +92,17 @@ export default () => {
             return (
               <div key={compKey} style={style}>
                 {Component ? <Component height={rowHeight * i.h + marginTop * (i.h - 1)} /> : compKey}
-                <span className={styles.remove} onClick={() => onRemoveItem(i)}>x</span>
+                {status === 'edit' && <span className={styles.remove} onClick={() => onRemoveItem(i)}>x</span>}
               </div>
             )
           })}
         </ResponsiveGridLayout>
       </div>
-      <RightContent
+      {status === 'edit' && (<RightContent
         tempObj={tempObj}
         layouts={layouts}
         setDragItem={setDragItem}
-      />
+      />)}
     </div >
   )
 }

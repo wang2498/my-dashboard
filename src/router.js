@@ -1,6 +1,6 @@
 import Layout from './layouts'
 import dashboardLayout from './layouts/dashboardLayout'
-import Home from './pages/Home'
+import Home from './pages/Dashboard/Home'
 import Dashboard from './pages/Dashboard'
 export default [
   {

@@ -1,101 +1,128 @@
-import React from 'react'
-import ReactEcharts from 'echarts-for-react'
+import React from "react";
+import {
+  Chart,
+  Geom,
+  Axis,
+  Tooltip,
+} from "bizcharts";
+import moment from 'moment';
+class Gradientcolorline extends React.Component {
+  render() {
+    function mathematics(values) {
+      let minX = 0;
+      let maxX = 0;
+      let min = Infinity;
+      let max = -Infinity;
+      let avg = 0;
 
-const Test2 = props => {
-  const { height } = props;
-  const getOption = () => ({
-    title: {
-      text: '堆叠区域图'
-    },
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'cross',
-        label: {
-          backgroundColor: '#6a7985'
+      for (const index in values) {
+        const item = values[index];
+        maxX = item > max ? index : maxX;
+        minX = item < min ? index : minX;
+        max = item > max ? item : max;
+        min = item < min ? item : min;
+        avg += item;
+      }
+
+      avg /= values.length;
+      return {
+        min: {
+          x: minX,
+          value: min
+        },
+        max: {
+          x: maxX,
+          value: max
+        },
+        avg
+      };
+    }
+
+    function getInterval(values, key, interval) {
+      const num = Math.floor(values.length / interval);
+      const ticks = [];
+
+      for (let i = 0; i <= interval; i += 1) {
+        if (i * num >= values.length) {
+          ticks.push(values[values.length - 1][key]);
+        } else {
+          ticks.push(values[num * i][key]);
         }
       }
-    },
-    legend: {
-      data: ['邮件营销', '联盟广告', '视频广告', '直接访问', '搜索引擎']
-    },
-    toolbox: {
-      feature: {
-        saveAsImage: {}
+
+      return ticks;
+    }
+
+    function normalize(min, max, avg) {
+      const percent = (avg - min) / (max - min);
+      return percent.toFixed(2);
+    }
+
+    const newValues = [];
+    const data = [];
+
+    for (let i = 0; i < 50; i += 1) {
+      const val = 90 + 10 * Math.random();
+      data.push({
+        time: 1000 * i + 100,
+        sold: val
+      });
+      newValues.push(val);
+    }
+
+    const math = mathematics(newValues);
+    const percent = normalize(math.min.value, math.max.value, math.avg);
+    const cols = {
+      time: {
+        // 需要自己计算合理的ticks分隔，不然会出现数据空白的现象
+        ticks: getInterval(data, "time", 10)
       }
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true
-    },
-    xAxis: [
-      {
-        type: 'category',
-        boundaryGap: false,
-        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
-      }
-    ],
-    yAxis: [
-      {
-        type: 'value'
-      }
-    ],
-    series: [
-      {
-        name: '邮件营销',
-        type: 'line',
-        stack: '总量',
-        areaStyle: {},
-        data: [120, 132, 101, 134, 90, 230, 210]
-      },
-      {
-        name: '联盟广告',
-        type: 'line',
-        stack: '总量',
-        areaStyle: {},
-        data: [220, 182, 191, 234, 290, 330, 310]
-      },
-      {
-        name: '视频广告',
-        type: 'line',
-        stack: '总量',
-        areaStyle: {},
-        data: [150, 232, 201, 154, 190, 330, 410]
-      },
-      {
-        name: '直接访问',
-        type: 'line',
-        stack: '总量',
-        areaStyle: {},
-        data: [320, 332, 301, 334, 390, 330, 320]
-      },
-      {
-        name: '搜索引擎',
-        type: 'line',
-        stack: '总量',
-        label: {
-          normal: {
-            show: true,
-            position: 'top'
-          }
-        },
-        areaStyle: {},
-        data: [820, 932, 901, 934, 1290, 1330, 1320]
-      }
-    ]
-  })
-  return (
-    <div style={{ height, padding: 10 }}>
-      <ReactEcharts style={{ height: height - 20 }} option={getOption()} />
-    </div>
-  )
+    };
+    const { height } = this.props; // 为解决高度自适应问题约束为继承高度
+    return (
+      <Chart
+        forceFit
+        height={height}
+        data={data}
+        scale={cols}
+      >
+        <Axis name="time" title={null} />
+        <Axis
+          name="sold"
+          title={null}
+          label={{
+            formatter: val => `${val}%`
+          }}
+        />
+        <Tooltip />
+        <Geom
+          type="line"
+          position="time*sold"
+          color={`l (270) 0:rgba(255,0,0,1) ${percent}:rgba(206,241,141,1) 1:rgba(47,194,91,1)`}
+          tooltip={[
+            "time*sold",
+            (time, sold) => ({
+              title: moment(time).format("mm:ss"),
+              name: "Success Rate",
+              value: `${sold.toFixed(2)}%`
+            })
+          ]}
+          select={[
+            true,
+            {
+              mode: "single"
+            }
+          ]}
+        />
+      </Chart>
+    );
+  }
 }
+
 export default {
-  component: Test2,
-  img: 'https://pic2.zhimg.com/v2-a0197b9e67edf7158e81664bb3d7fcc5_t.jpg',
-  group: '第一组',
-  title: '测试2',
+  component: Gradientcolorline,
+  img: 'http://d.lanrentuku.com/down/png/1904/fantasy_and_role_play_game/destructive_magic_2913121.png',
+  group: '图表库',
+  title: '渐变折线图',
   key: '2'
 }
