@@ -2,7 +2,7 @@ import React from 'react';
 import { Layout, Icon, Button, Tooltip } from 'antd';
 import { Link } from 'react-router-dom'
 import styles from './index.less';
-const defaultProps = { type: 'primary', size: 'small' }
+const defaultProps = { type: 'primary', size: 'small', style: { marginRight: 10} }
 const { Header } = Layout;
 
 export default ({ status, handleSave, setStatus }) => (
@@ -17,13 +17,13 @@ export default ({ status, handleSave, setStatus }) => (
         </div>
       </div>
       <div className={styles.right}>
-        {status === 'edit' ? (
-          <> <Button {...defaultProps} style={{ marginRight: 10 }} onClick={() => setStatus('preview')}>预览</Button>
-            <Tooltip title="保存成功后将跳至首页">
-              <Button {...defaultProps} onClick={handleSave}>保存</Button>
-            </Tooltip>
-          </>
-        ) : <Button {...defaultProps} onClick={() => setStatus('edit')}>返回</Button>}
+        {status === 'edit' ?
+          <Button {...defaultProps} onClick={() => setStatus('preview')}>预览</Button> :
+          <Button {...defaultProps} onClick={() => setStatus('edit')}>返回</Button>
+        }
+        <Tooltip title="保存成功后将跳至首页">
+          <Button {...defaultProps} onClick={handleSave}>保存</Button>
+        </Tooltip>
       </div>
     </Header>
   </div>

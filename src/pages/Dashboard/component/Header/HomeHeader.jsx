@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout, Icon } from 'antd';
 import { Link } from 'react-router-dom';
+import HeaderRight from './headerRight'
 import HeaderMenu from './HeaderMenu'
 import styles from './index.less';
 
@@ -17,9 +18,9 @@ export default () => (
           </Link>
         </div>
       </div>
-      {/* <HeaderMenu /> */}
+      <HeaderMenu />
       <div className={`${styles.right} mydashboard_userInfo`}>
-
+        <HeaderRight />
       </div>
     </Header>
   </div>

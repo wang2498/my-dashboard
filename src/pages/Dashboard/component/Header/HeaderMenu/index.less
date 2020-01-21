@@ -1,0 +1,36 @@
+.headMenu {
+  display: inline-block;
+  position: position;
+  width: calc(100vw - 400px);
+  height: 100%;
+  white-space: space nowrap;
+  padding-right: 50px;
+  :global {
+    .ant-menu-dark {
+      position: relative;
+      top: -7px;
+      background: transparent;
+      & > .ant-menu-item {
+        margin: 0 5px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 15px;
+        text-align: center;
+        color: #fff;
+        font-size: 12px;
+        // & :hover {
+        //   background: #40a9ff;
+        // }
+        & > a {
+          color: #fff;
+        }
+      }
+      .ant-menu-item-selected {
+        background: #40a9ff !important;
+      }
+      .ant-menu-item-active {
+        background: #40a9ff !important;
+      }
+    }
+  }
+}
