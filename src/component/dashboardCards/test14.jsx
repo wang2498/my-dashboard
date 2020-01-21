@@ -1,5 +1,5 @@
 import React from 'react';
-import { Calendar } from 'antd';
+import { Rate } from 'antd';
 import styles from './index.less';
 const style = {
   textAlign: 'center',
@@ -9,18 +9,18 @@ const style = {
   alignItems: "center",
 
 }
-const Test13 = props => {
+const Test14 = props => {
   const { height } = props;
   return (
     <div className={styles.static_wrap} style={{ ...style, height }}>
-      <Calendar />
+      <Rate allowHalf defaultValue={1.5} />
     </div>
   )
 }
 export default {
-  component: Test13,
-  img: 'http://d.lanrentuku.com/down/png/1405/tailwaggers_free/pug.png',
-  group: '详情库',
-  title: '日历',
-  key: '13'
+  component: Test14,
+  img: 'http://d.lanrentuku.com/down/png/1312/christmas-flat-color-icons/star-512.png',
+  group: '文案库',
+  title: '星级评分',
+  key: '14'
 }
