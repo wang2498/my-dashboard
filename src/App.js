@@ -8,15 +8,13 @@ import './App.css';
 function App() {
   return (
     <Router >
-      <Redirect path='/' to='/dashboardLayout' />
-      <Switch >
-        <DashboardLayout>
-          {/* <Route path='/' component={Dashboard} /> */}
-          <Route path='/Home' component={Home} />
+      <DashboardLayout>
+        <Switch >
+          <Route path='/Home' exact component={Home} />
           <Route path='/dashboardEdit' component={Dashboard} />
-          <Redirect path='/' to='/dashboardEdit' />
-        </DashboardLayout>
-      </Switch>
+          <Redirect path='/' exact to='/dashboardEdit' />
+        </Switch>
+      </DashboardLayout>
 
     </Router >
 

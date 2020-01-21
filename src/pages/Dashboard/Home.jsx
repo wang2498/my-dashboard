@@ -2,28 +2,24 @@ import React, { useState, useEffect } from 'react';
 import { Responsive, WidthProvider } from 'react-grid-layout';
 import { Spin } from 'antd';
 import { importAll } from '../../util';
+import { getLayout } from '../../service/dashboard'
 import HomeHeader from './component/Header/HomeHeader'
 import styles from './index.less'
 const compContainerObj = importAll(require.context('../../component/dashboardCards', false, /\.jsx$/));
 const ResponsiveGridLayout = WidthProvider(Responsive);
-export default ({ userId }) => {
+export default () => {
   const [layouts, setLayouts] = useState({ xs: [] });
   const [loading, setLoading] = useState(false);
   const getDashboardLayout = async () => {
     setLoading(true);
-    // const res = await getLayout({userId: '123Î'})
-    const newRes = {
-      xs: JSON.parse({}).map(i => ({ ...i, static: true }))
-    }
-    setLayouts(newRes);
+    const res = await getLayout();
+    console.log(res);
+    setLayouts({ xs: res.xs.map(i => ({ ...i, static: true })) } || { xs: [] });
     setLoading(false);
   }
   useEffect(() => {
-    if (userId) {
-      getDashboardLayout()
-    }
-
-  }, [userId])
+    getDashboardLayout()
+  }, [])
   const rowHeight = 50;
   const marginTop = 5;
   const layoutsProps = {
@@ -38,7 +34,7 @@ export default ({ userId }) => {
     rowHeight
   }
   return (
-    <div>
+    <div className={styles.dashboard_home}>
       <HomeHeader />
       <Spin spinning={loading} >
         <ResponsiveGridLayout {...layoutsProps} >

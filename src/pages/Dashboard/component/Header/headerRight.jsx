@@ -25,7 +25,7 @@ const arr = [
 ]
 const menu = (
   <Menu>
-    <Item><Link to='/dasboardEdit'>配置首页</Link></Item>
+    <Item><Link to='/dashboardEdit'>配置首页</Link></Item>
   </Menu>
 )
 const HeaderRight = () => {
